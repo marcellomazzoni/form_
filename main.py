@@ -25,18 +25,18 @@ logging.basicConfig(
 def filtro_probabilita():
     # Generiamo un numero tra 0 e 100
     # Più tieni basso questo numero, più raramente lo script partirà.
-    soglia = 15 
+    soglia = 30 
     estrazione = random.randint(1, 100)
     return estrazione <= soglia
 
 if __name__ == "__main__":
     try:
         if not filtro_probabilita():
-            print("Log: Estrazione negativa. Lo script si chiude per rispettare la frequenza.")
+            logging.warning("Estrazione negativa. Lo script si chiude per rispettare la frequenza.")
             sys.exit(0)
         
         # Se passa il filtro, il codice continua...
-        print("Log: Estrazione positiva! Eseguo Selenium...")
+        logging.info("Log: Estrazione positiva! Eseguo Selenium...")
             
         with open('database_scuole.json', 'r') as f:
             database_scuole = json.load(f)
@@ -265,6 +265,18 @@ if __name__ == "__main__":
         
         
         driver.quit()
+        report = f"""
+Script eseguito!
+Nome e Cognome: {TESTO_NOME_COGNOME}
+Mail: {TESTO_MAIL}
+Provincia: {TESTO_PROVINCIA}
+Istituto: {TESTO_ISTITUTO}
+Classe: {TESTO_CLASSE}
+Problematiche: {TESTO_PROBLEMATICHE_SCUOLA}
+Gita: {TESTO_COMMENTO_GITA}
+Azione Prof: {TESTO_COSA_FATTO_PROF}
+"""
+        logging.info(report)
         
     except Exception as e:
         logging.error(f"Errore:\n {e}")
