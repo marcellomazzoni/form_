@@ -1,0 +1,25 @@
+name: Esegui Script Selenium
+
+on:
+  schedule:
+    # GitHub proverà a lanciarlo ogni 20 minuti
+    - cron: '*/20 * * * *'
+  workflow_dispatch: # Questo pulsante ti permette di testarlo a mano
+
+jobs:
+  run-selenium:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica il codice della repo
+        uses: actions/checkout@v3
+
+      - name: Installa Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+
+      - name: Installa librerie
+        run: pip install -r requirements.txt
+
+      - name: Esegui lo script Python
+        run: python main.py
