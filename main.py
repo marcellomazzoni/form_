@@ -265,8 +265,14 @@ if __name__ == "__main__":
             extra_input.clear()
         
         
+        # Click the 'Invia' button
+        next_button = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div[2]/span/span')
+        next_button.click()
+        time.sleep(3)
+        
         driver.quit()
         report = f"""
+******************************************
 Script eseguito!
 Nome e Cognome: {TESTO_NOME_COGNOME}
 Mail: {TESTO_MAIL}
@@ -276,6 +282,7 @@ Classe: {TESTO_CLASSE}
 Problematiche: {TESTO_PROBLEMATICHE_SCUOLA}
 Gita: {TESTO_COMMENTO_GITA}
 Azione Prof: {TESTO_COSA_FATTO_PROF}
+******************************************
 """
         logging.info(report)
         
