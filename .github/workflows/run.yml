@@ -2,9 +2,9 @@ name: Esegui Script Selenium
 
 on:
   schedule:
-    # GitHub proverà a lanciarlo ogni 20 minuti
-    - cron: '*/20 * * * *'
-  workflow_dispatch: # Questo pulsante ti permette di testarlo a mano
+    # Questa è la sintassi per "ogni minuto"
+    - cron: '*/10 * * * *'
+  workflow_dispatch: 
 
 jobs:
   run-selenium:

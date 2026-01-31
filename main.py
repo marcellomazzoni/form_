@@ -25,7 +25,7 @@ logging.basicConfig(
 def filtro_probabilita():
     # Generiamo un numero tra 0 e 100
     # Più tieni basso questo numero, più raramente lo script partirà.
-    soglia = 99
+    soglia = 15
     estrazione = random.randint(1, 100)
     logging.info(f"{estrazione} vs. {soglia}")
     return estrazione <= soglia
@@ -78,7 +78,6 @@ if __name__ == "__main__":
         chrome_options.add_argument("--disable-dev-shm-usage")
         # 2. Initialize the Driver
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-
 
         ##### Pagina 1 #######
         logging.info("Lo script è partito...")
@@ -264,13 +263,13 @@ if __name__ == "__main__":
                 )
             extra_input.clear()
         
-        
         # Click the 'Invia' button
         next_button = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div[2]/span/span')
         next_button.click()
         time.sleep(3)
         
         driver.quit()
+        
         report = f"""
 ******************************************
 Script eseguito!
