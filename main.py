@@ -25,7 +25,7 @@ logging.basicConfig(
 def filtro_probabilita():
     # Generiamo un numero tra 0 e 100
     # Più tieni basso questo numero, più raramente lo script partirà.
-    soglia = 15
+    soglia = 50
     estrazione = random.randint(1, 100)
     logging.info(f"{estrazione} vs. {soglia}")
     return estrazione <= soglia
