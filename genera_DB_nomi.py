@@ -168,7 +168,7 @@ keywords = [
 
 
 
-def generate_mega_database(target_size=5000, nomi_base=nomi, cognomi=cognomi, keywords = keywords):
+def generate_mega_database(target_size=9000, nomi_base=nomi, cognomi=cognomi, keywords = keywords):
     # Liste espanse per massimizzare le combinazioni
     prefissi_nomi = ["Gian", "Pier", "Carlo", "Vittorio", "Italo"]
     suffissi_nomi = ["maria", "luigi", "antonio", "francesco", "alberto", "manuele"]
@@ -210,7 +210,7 @@ def generate_mega_database(target_size=5000, nomi_base=nomi, cognomi=cognomi, ke
                 nick_list.add(pattern())
             
             db[full_name] = list(nick_list)
-            
+                
     return db
 
 # Genera un database di 5000 voci (puoi aumentare il numero)
