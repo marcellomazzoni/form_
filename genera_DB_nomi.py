@@ -177,7 +177,7 @@ def generate_mega_database(target_size=9000, nomi_base=nomi, cognomi=cognomi, ke
     
     while len(db) < target_size:
         # Genera un nome composto o singolo
-        if random.random() > 0.9:
+        if random.random() > 0.95:
             nome = random.choice(prefissi_nomi) + random.choice(suffissi_nomi)
         else:
             nome = random.choice(nomi_base)
@@ -196,13 +196,13 @@ def generate_mega_database(target_size=9000, nomi_base=nomi, cognomi=cognomi, ke
                 pattern = random.choice([
                     lambda: f"{nome[0].lower()}{cognome.replace(' ', '').lower()}{random.randint(10, 99)}",
                     lambda: f"{random.choice(keywords)}{random.randint(2, 16)}",
-                    lambda: f"{cognome.replace(' ', '').lower()}{random.choice(list(["","","",".",".",".",".","_","X","x","zZz"]))}{nome.replace(' ', '').lower()}",
-                    lambda: f"{nome.replace(' ', '').lower()}{random.choice(list(["","","",".",".",".",".","_","X","x","zZz"]))}{cognome.replace(' ', '').lower()}",
-                    lambda: f"{cognome.replace(' ', '').lower()}{random.choice(list(["","","",".",".",".",".","_","X","x","zZz"]))}{random.choice(keywords)}",
+                    lambda: f"{cognome.replace(' ', '').lower()}{random.choice(list(["","","",".",".",".",".","_","X","x","zZz","_dux_"]))}{nome.replace(' ', '').lower()}",
+                    lambda: f"{nome.replace(' ', '').lower()}{random.choice(list(["","","",".",".",".",".","_","X","x","zZz","_dux_"]))}{cognome.replace(' ', '').lower()}",
+                    lambda: f"{cognome.replace(' ', '').lower()}{random.choice(list(["","","",".",".",".",".","_","X","x","zZz","_dux_"]))}{random.choice(keywords)}",
                     lambda: f"{nome.replace(' ', '').lower()}{random.choice(list(["",".","_","X","x"]))}{random.choice(keywords)}",
-                    lambda: f"{nome.replace(' ', '').lower()[:3]}{cognome.replace(' ', '').lower()[:3]}{random.randint(0, 9)}",
-                    lambda: f"{nome.replace(' ', '').lower()[:5]}_{cognome.replace(' ', '').lower()[:5]}",
-                    lambda: f"{nome.replace(' ', '').lower()[:3]}{random.choice(keywords)}{cognome.replace(' ', '').lower()[:3]}",
+                    lambda: f"{nome.replace(' ', '').lower()[:3]}{cognome.replace(' ', '').lower()[:3]}_{random.randint(0, 9)}",
+                    lambda: f"{nome.replace(' ', '').lower()[:2]}_{cognome.replace(' ', '').lower()[:5]}",
+                    lambda: f"{nome.replace(' ', '').lower()[:2]}{random.choice(keywords)}{cognome.replace(' ', '').lower()[:5]}",
                     lambda: f"{random.choice(keywords)}.{nome.replace(' ', '').lower()}{random.choice(list(["",str(random.randint(7,15))]))}",
                     lambda: f"{random.choice(list(["","_",str(random.randint(8,15)) + "_"]))}{nome.replace(' ', '').lower()}{random.choice(list(["","_","_"+str(random.randint(8,15))]))}",
                     lambda: f"{cognome.replace(' ', '').lower()}{nome[0].lower()}",
@@ -210,11 +210,13 @@ def generate_mega_database(target_size=9000, nomi_base=nomi, cognomi=cognomi, ke
                 nick_list.add(pattern())
             
             db[full_name] = list(nick_list)
-                
+            
+            for key in db:
+                db[key] = [nick.replace("'", "") for nick in db[key]]
     return db
 
 # Genera un database di 5000 voci (puoi aumentare il numero)
-database_immenso = generate_mega_database(5000)
+database_immenso = generate_mega_database(9000)
 
 with open('database_nomi.json', 'w', encoding='utf-8') as f:
     json.dump(database_immenso, f, indent=4, ensure_ascii=False)

@@ -3,7 +3,7 @@ name: Esegui Script Selenium
 on:
   schedule:
     # Questa è la sintassi per "ogni minuto"
-    - cron: '*/10 * * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch: 
 
 jobs:

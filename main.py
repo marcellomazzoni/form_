@@ -11,6 +11,7 @@ import random
 import sys
 import logging
 import sys
+from datetime import datetime
 
 # Configurazione del logger
 logging.basicConfig(
@@ -23,11 +24,23 @@ logging.basicConfig(
 # deve attivarsi 1 volta su 9 tentativi (180/20 = 9).
 
 def filtro_probabilita():
-    # Generiamo un numero tra 0 e 100
-    # Più tieni basso questo numero, più raramente lo script partirà.
-    soglia = 50
+    now = datetime.now()
+    hour = now.hour
+
+    # Definizione fasce orarie: mattina scolastica, pomeriggio, notte
+    if 8 <= hour < 13:
+        soglia = 75  # mattina
+        periodo = "mattina"
+    elif 13 <= hour < 19:
+        soglia = 50  # pomeriggio
+        periodo = "pomeriggio"
+    else:
+        soglia = 15  # notte
+        periodo = "notte"
+
     estrazione = random.randint(1, 100)
-    logging.info(f"{estrazione} vs. {soglia}")
+    logging.info(f"Ora: {now.strftime('%Y-%m-%d %H:%M:%S')} - Periodo: {periodo} - Soglia: {soglia}% - Estrazione: {estrazione}")
+    
     return estrazione <= soglia
 
 if __name__ == "__main__":
@@ -53,7 +66,9 @@ if __name__ == "__main__":
         email_domains = [
             # Global providers
             "gmail.com","outlook.com","gmail.com","outlook.com","gmail.com","outlook.com","gmail.com","outlook.com","gmail.com","outlook.com","gmail.com","outlook.com","gmail.com","outlook.com","hotmail.com","hotmail.it",
-            "live.com","msn.com","yahoo.com","yahoo.it","icloud.com",
+            "live.com","yahoo.com","yahoo.it","icloud.com",
+            "gmail.com","outlook.com","gmail.com","outlook.com","gmail.com","outlook.com","gmail.com","outlook.com","gmail.com","outlook.com","gmail.com","outlook.com","gmail.com","outlook.com","hotmail.com","hotmail.it",
+            "live.com","yahoo.com","yahoo.it","icloud.com",
             # Privacy / alternative
             "proton.me","protonmail.com",
             # Italian providers
@@ -88,10 +103,10 @@ if __name__ == "__main__":
         # Wait until the input field is visible
         mail_field = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div/div/div/div[2]/div/div[1]/div/div[1]/input')))
-        time.sleep(random.choice([1, 0.5, 2, 2.5, 5, 1.5, 3, 4, 9, 3.2, 0.6]))
+        time.sleep(random.choice([4, 3.5, 3, 4.5, 7, 3.5, 5, 6, 10, 4.2, 1.6]))
         mail_field.clear()
         mail_field.send_keys(f"{TESTO_MAIL}")
-        time.sleep(random.choice([1, 0.5, 2, 2.5, 5, 1.5, 3, 4, 9, 3.2, 0.6]))
+        time.sleep(random.choice([4, 3.5, 3, 4.5, 7, 3.5, 5, 6, 10, 4.2, 1.6]))
         # Click the 'Next' button
         next_button = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div')
         next_button.click()
@@ -105,21 +120,21 @@ if __name__ == "__main__":
         first_name_field.clear()
         first_name_field.send_keys(f"{TESTO_NOME_COGNOME}")
 
-        time.sleep(random.choice([1, 0.5, 2, 2.5, 5, 1.5, 3, 4, 9, 3.2, 0.6]))
+        time.sleep(random.choice([4, 3.5, 3, 4.5, 7, 3.5, 5, 6, 10, 4.2, 1.6]))
         # Provincia
         first_name_field = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div/div[1]/input')))
         first_name_field.clear()
         first_name_field.send_keys(F"{TESTO_PROVINCIA}")
 
-        time.sleep(random.choice([1, 0.5, 2, 2.5, 5, 1.5, 3, 4, 9, 3.2, 0.6]))
+        time.sleep(random.choice([4, 3.5, 3, 4.5, 7, 3.5, 5, 6, 10, 4.2, 1.6]))
         # Istituto
         first_name_field = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[4]/div/div/div[2]/div/div[1]/div/div[1]/input')))
         first_name_field.clear()
         first_name_field.send_keys(f"{TESTO_ISTITUTO}")
 
-        time.sleep(random.choice([1, 0.5, 2, 2.5, 5, 1.5, 3, 4, 9, 3.2, 0.6]))
+        time.sleep(random.choice([4, 3.5, 3, 4.5, 7, 3.5, 5, 6, 10, 4.2, 1.6]))
 
         # Classe
         first_name_field = WebDriverWait(driver, 10).until(
@@ -127,7 +142,7 @@ if __name__ == "__main__":
         first_name_field.clear()
         first_name_field.send_keys(f"{TESTO_CLASSE}")
 
-        time.sleep(random.choice([1, 0.5, 2, 2.5, 5, 1.5, 3, 4, 9, 3.2, 0.6]))
+        time.sleep(random.choice([4, 3.5, 3, 4.5, 7, 3.5, 5, 6, 10, 4.2, 1.6]))
 
         # Click the 'Next' button
         next_button = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div[2]/span/span')
@@ -136,7 +151,7 @@ if __name__ == "__main__":
         ########### Pagina 3 ############
         logging.info("Condizioni Scolastiche...")
         # Condizioni scolastiche
-        time.sleep(random.choice([1, 0.5, 2, 2.5, 5, 1.5, 3, 4, 9, 3.2, 0.6]))
+        time.sleep(random.choice([4, 3.5, 3, 4.5, 7, 3.5, 5, 6, 10, 4.2, 1.6]))
 
         condizioni_options = [
             '//*[@id="i12"]/div[3]/div',
@@ -148,7 +163,7 @@ if __name__ == "__main__":
         choice_element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, chosen_xpath)))
         choice_element.click()
 
-        time.sleep(random.choice([1, 0.5, 2, 2.5, 5, 1.5, 3, 4, 9, 3.2, 0.6]))
+        time.sleep(random.choice([4, 3.5, 3, 4.5, 7, 3.5, 5, 6, 10, 4.2, 1.6]))
 
         problematiche_options = [
         '//*[@id="i20"]/div[3]/div','//*[@id="i23"]/div[3]/div','//*[@id="i26"]/div[3]/div',
@@ -178,7 +193,7 @@ if __name__ == "__main__":
         else:
             extra_input.clear()
             
-        time.sleep(random.choice([1, 0.5, 2, 2.5, 5, 1.5, 3, 4, 9, 3.2, 0.6]))
+        time.sleep(random.choice([4, 3.5, 3, 4.5, 7, 3.5, 5, 6, 10, 4.2, 1.6]))
         # Click the 'Next' button
         next_button = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div[2]/span/span')
         next_button.click()
@@ -187,7 +202,7 @@ if __name__ == "__main__":
         ########### Pagina 4 ############
         logging.info("Il prof comunista...")
         # Avere professore comunista
-        time.sleep(random.choice([1, 0.5, 2, 2.5, 5, 1.5, 3, 4, 9, 3.2, 0.6]))
+        time.sleep(random.choice([4, 3.5, 3, 4.5, 7, 3.5, 5, 6, 10, 4.2, 1.6]))
 
         prof_comunista = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="i6"]/div[3]')))
         prof_comunista.click()
@@ -208,9 +223,10 @@ if __name__ == "__main__":
         ########### Pagina 5 ############
         logging.info("Le gite...")
         # Gite Scolastiche
-        time.sleep(random.choice([1, 0.5, 2, 2.5, 5, 1.5, 3, 4, 9, 3.2, 0.6]))
+        time.sleep(random.choice([4, 3.5, 3, 4.5, 7, 3.5, 5, 6, 10, 4.2, 1.6]))
         si_no = [
-        '//*[@id="i6"]/div[3]',
+        '//*[@id="i6"]/div[3]','//*[@id="i6"]/div[3]','//*[@id="i6"]/div[3]','//*[@id="i6"]/div[3]'
+        '//*[@id="i6"]/div[3]','//*[@id="i6"]/div[3]','//*[@id="i6"]/div[3]','//*[@id="i6"]/div[3]'
         '//*[@id="i9"]/div[3]'
         ]
 
@@ -218,7 +234,7 @@ if __name__ == "__main__":
         choice_element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, chosen_xpath)))
         choice_element.click()
 
-        time.sleep(random.choice([1, 0.5, 2, 2.5, 5, 1.5, 3, 4, 9, 3.2, 0.6]))
+        time.sleep(random.choice([4, 3.5, 3, 4.5, 7, 3.5, 5, 6, 10, 4.2, 1.6]))
 
         # 3. Check if the chosen option is the one requiring text input
         if chosen_xpath == si_no[1]:
@@ -239,7 +255,7 @@ if __name__ == "__main__":
             choice_element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, chosen_xpath)))
             choice_element.click()
 
-            time.sleep(random.choice([1, 0.5, 2, 2.5, 5, 1.5, 3, 4, 9, 3.2, 0.6]))
+            time.sleep(random.choice([4, 3.5, 3, 4.5, 7, 3.5, 5, 6, 10, 4.2, 1.6]))
             
             input_field_xpath = '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div/span/div/div[4]/div/span/div/div/div[1]/input'
             extra_input = WebDriverWait(driver, 5).until(
@@ -249,7 +265,7 @@ if __name__ == "__main__":
             if chosen_xpath == commento_gita_options[len(commento_gita_options)-1]:
 
                 # Commento gita
-                time.sleep(random.choice([8, 9, 7, 13, 10, 20, 6]))
+                time.sleep(random.choice([10, 12, 16, 25, 8, 20, 19]))
                 extra_input.clear()
                 extra_input.send_keys(f"{TESTO_COMMENTO_GITA}")
                 
