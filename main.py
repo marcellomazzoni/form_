@@ -33,7 +33,7 @@ def filtro_probabilita():
         periodo = "mattina"
         
     elif 13 <= hour < 23:
-        soglia = 50  # pomeriggio 120 run -- 60 volte
+        soglia = 60  # pomeriggio 120 run -- 60 volte
         periodo = "pomeriggio"
         
     else:
