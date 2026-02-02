@@ -27,20 +27,28 @@ def filtro_probabilita():
     now = datetime.now()
     hour = now.hour
 
+    expected = 0
+    
     # Definizione fasce orarie: mattina scolastica, pomeriggio, notte
     if 8 <= hour < 13:
-        soglia = 75  # mattina
+        soglia = 75  # mattina 60 run -- 45 volte
         periodo = "mattina"
+        
     elif 13 <= hour < 23:
-        soglia = 50  # pomeriggio
+        soglia = 50  # pomeriggio 120 run -- 60 volte
         periodo = "pomeriggio"
+        
     else:
-        soglia = 15  # notte
+        soglia = 15  # notte 108 run -- 16 vole
         periodo = "notte"
-
+    
+    expected += (13-8)*12*0.75
+    expected += (23-13)*12*0.5
+    expected += (24-(13-8)-(23-13))*12*0.15
+            
     estrazione = random.randint(1, 100)
     logging.info(f"Ora: {now.strftime('%Y-%m-%d %H:%M:%S')} - Periodo: {periodo} - Soglia: {soglia}% - Estrazione: {estrazione}")
-    
+    logging.info(f"Attualmente facendo circa {int(round(expected))} questionari al giorno")
     return estrazione <= soglia
 
 if __name__ == "__main__":
